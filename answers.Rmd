@@ -1,0 +1,22 @@
+---
+title: "Homework 2"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+In base R, we can use matrix operations. Firstly, load the data after setting the work directory.
+```{r}
+chip_seq_peak <- read.table("data.txt", header = TRUE)
+closest <- (function(v) which(v == 1)[apply(sapply(1:length(v), function(x) abs(x - which(v == 1))), 2, which.min)]) (chip_seq_peak$value)
+chip_seq_peak$closest <- closest
+chip_seq_peak
+```
+
+With `todyverse`
+```{r}
+library(tidyverse)
+
+```
+Firstly, get the row numbers, and use the `mutate` to get get a colum where the row numbers are remained only for 1's by mupltplying the row number column and the value column. Then do substractions like that in base R version. Then find the minimum across the three new generated columns and we get the minimal distances. Finally, check where do the minimal distances come from.
